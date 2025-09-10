@@ -116,11 +116,10 @@ class CosmosConversationClient():
         else:
             return conversations[0]
  
-    async def create_message(self, uuid, conversation_id, user_id, input_message: dict):
+    async def create_message(self, uuid, conversation_id, input_message: dict):
         message = {
             'id': uuid,
             'type': 'message',
-            'userId' : user_id,
             'createdAt': datetime.utcnow().isoformat(),
             'updatedAt': datetime.utcnow().isoformat(),
             'conversationId' : conversation_id,
@@ -143,8 +142,8 @@ class CosmosConversationClient():
         else:
             return False
     
-    async def update_message_feedback(self, user_id, message_id, feedback):
-        message = await self.container_client.read_item(item=message_id, partition_key=user_id)
+    async def update_message_feedback(self, message_id, feedback, conversation_id):
+        message = await self.container_client.read_item(item=message_id, partition_key=conversation_id)
         if message:
             message['feedback'] = feedback
             resp = await self.container_client.upsert_item(message)
