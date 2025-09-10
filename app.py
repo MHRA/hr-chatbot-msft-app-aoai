@@ -369,6 +369,8 @@ async def send_chat_request(request_body, request_headers):
     for message in messages:
         if message.get("role") != 'tool':
             filtered_messages.append(message)
+        if message.get("role") == 'user':
+            logger.info(f"Question: {message.get('content')}")
             
     request_body['messages'] = filtered_messages
     model_args = prepare_model_args(request_body, request_headers)
@@ -425,15 +427,15 @@ async def conversation_internal(request_body, request_headers):
             response = await make_response(format_as_ndjson(result))
             response.timeout = None
             response.mimetype = "application/json-lines"
-            # Log the conversation data
-            truncated_data = truncate_data(json.dumps(request_body))
-            logger.info(f"Conversation data: {truncated_data}")
+            # # Log the conversation data
+            # truncated_data = truncate_data(json.dumps(request_body))
+            # logger.info(f"Conversation data: {truncated_data}")
             return response
         else:
             result = await complete_chat_request(request_body, request_headers)
-            # Log the conversation data
-            truncated_data = truncate_data(json.dumps(request_body))
-            logger.info(f"Conversation data: {truncated_data}")
+            # # Log the conversation data
+            # truncated_data = truncate_data(json.dumps(request_body))
+            # logger.info(f"Conversation data: {truncated_data}")
             return jsonify(result)
 
     except Exception as ex:
