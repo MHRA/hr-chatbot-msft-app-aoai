@@ -468,8 +468,9 @@ def get_frontend_settings():
 @bp.route("/history/generate", methods=["POST"])
 async def add_conversation():
     await cosmos_db_ready.wait()
-    authenticated_user = get_authenticated_user_details(request_headers=request.headers)
-    user_id = authenticated_user["user_principal_id"]
+    # authenticated_user = get_authenticated_user_details(request_headers=request.headers)
+    # user_id = authenticated_user["user_principal_id"]
+    user_id = "00000000-0000-0000-0000-000000000000"
 
     ## check request for conversation_id
     request_json = await request.get_json()
@@ -524,8 +525,9 @@ async def add_conversation():
 @bp.route("/history/update", methods=["POST"])
 async def update_conversation():
     await cosmos_db_ready.wait()
-    authenticated_user = get_authenticated_user_details(request_headers=request.headers)
-    user_id = authenticated_user["user_principal_id"]
+    # authenticated_user = get_authenticated_user_details(request_headers=request.headers)
+    # user_id = authenticated_user["user_principal_id"]
+    user_id = "00000000-0000-0000-0000-000000000000"
 
     ## check request for conversation_id
     request_json = await request.get_json()
@@ -574,8 +576,9 @@ async def update_conversation():
 @bp.route("/history/message_feedback", methods=["POST"])
 async def update_message():
     await cosmos_db_ready.wait()
-    authenticated_user = get_authenticated_user_details(request_headers=request.headers)
-    user_id = authenticated_user["user_principal_id"]
+    # authenticated_user = get_authenticated_user_details(request_headers=request.headers)
+    # user_id = authenticated_user["user_principal_id"]
+    user_id = "00000000-0000-0000-0000-000000000000"
 
     ## check request for message_id
     request_json = await request.get_json()
@@ -621,8 +624,9 @@ async def update_message():
 async def delete_conversation():
     await cosmos_db_ready.wait()
     ## get the user id from the request headers
-    authenticated_user = get_authenticated_user_details(request_headers=request.headers)
-    user_id = authenticated_user["user_principal_id"]
+    # authenticated_user = get_authenticated_user_details(request_headers=request.headers)
+    # user_id = authenticated_user["user_principal_id"]
+    user_id = "00000000-0000-0000-0000-000000000000"
 
     ## check request for conversation_id
     request_json = await request.get_json()
@@ -664,8 +668,9 @@ async def delete_conversation():
 async def list_conversations():
     await cosmos_db_ready.wait()
     offset = request.args.get("offset", 0)
-    authenticated_user = get_authenticated_user_details(request_headers=request.headers)
-    user_id = authenticated_user["user_principal_id"]
+    # authenticated_user = get_authenticated_user_details(request_headers=request.headers)
+    # user_id = authenticated_user["user_principal_id"]
+    user_id = "00000000-0000-0000-0000-000000000000"
 
     ## make sure cosmos is configured
     if not current_app.cosmos_conversation_client:
@@ -686,8 +691,9 @@ async def list_conversations():
 @bp.route("/history/read", methods=["POST"])
 async def get_conversation():
     await cosmos_db_ready.wait()
-    authenticated_user = get_authenticated_user_details(request_headers=request.headers)
-    user_id = authenticated_user["user_principal_id"]
+    # authenticated_user = get_authenticated_user_details(request_headers=request.headers)
+    # user_id = authenticated_user["user_principal_id"]
+    user_id = "00000000-0000-0000-0000-000000000000"
 
     ## check request for conversation_id
     request_json = await request.get_json()
@@ -738,8 +744,9 @@ async def get_conversation():
 @bp.route("/history/rename", methods=["POST"])
 async def rename_conversation():
     await cosmos_db_ready.wait()
-    authenticated_user = get_authenticated_user_details(request_headers=request.headers)
-    user_id = authenticated_user["user_principal_id"]
+    # authenticated_user = get_authenticated_user_details(request_headers=request.headers)
+    # user_id = authenticated_user["user_principal_id"]
+    user_id = "00000000-0000-0000-0000-000000000000"
 
     ## check request for conversation_id
     request_json = await request.get_json()
@@ -782,8 +789,9 @@ async def rename_conversation():
 async def delete_all_conversations():
     await cosmos_db_ready.wait()
     ## get the user id from the request headers
-    authenticated_user = get_authenticated_user_details(request_headers=request.headers)
-    user_id = authenticated_user["user_principal_id"]
+    # authenticated_user = get_authenticated_user_details(request_headers=request.headers)
+    # user_id = authenticated_user["user_principal_id"]
+    user_id = "00000000-0000-0000-0000-000000000000"
 
     # get conversations for user
     try:
@@ -826,8 +834,9 @@ async def delete_all_conversations():
 async def clear_messages():
     await cosmos_db_ready.wait()
     ## get the user id from the request headers
-    authenticated_user = get_authenticated_user_details(request_headers=request.headers)
-    user_id = authenticated_user["user_principal_id"]
+    # authenticated_user = get_authenticated_user_details(request_headers=request.headers)
+    # user_id = authenticated_user["user_principal_id"]
+    user_id = "00000000-0000-0000-0000-000000000000"
 
     ## check request for conversation_id
     request_json = await request.get_json()
