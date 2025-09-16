@@ -40,13 +40,6 @@ from dotenv import load_dotenv
 import os
 import logging
 from azure.monitor.opentelemetry import configure_azure_monitor
-
-load_dotenv()
-
-from dotenv import load_dotenv
-import os
-import logging
-from azure.monitor.opentelemetry import configure_azure_monitor
 from azure.identity import ManagedIdentityCredential
 from azure.monitor.opentelemetry import configure_azure_monitor
 
