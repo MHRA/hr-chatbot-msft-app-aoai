@@ -37,31 +37,23 @@ from backend.utils import (
 )
 
 from dotenv import load_dotenv
+import os
+import logging
+from azure.monitor.opentelemetry import configure_azure_monitor
 
 load_dotenv()
 
-from opencensus.ext.azure.log_exporter import AzureEventHandler
-from threading import Lock
+# Configure Azure Monitor (do this early)
+configure_azure_monitor(
+    connection_string=os.environ.get("APPLICATIONINSIGHTS_CONNECTION_STRING"),
+)
 
-# Basic configuration for logging
+# Configure logging
 logging.basicConfig(level=logging.INFO)
 
-# Create a logger
 logger = logging.getLogger(__name__)
-
-connection_string= os.environ.get("APPLICATIONINSIGHTS_CONNECTION_STRING")
-
-# Add AzureEventHandler to the logger
-azure_event_handler = AzureEventHandler(connection_string=connection_string)
-
-# Explicitly set the lock for the handler
-azure_event_handler.lock = Lock()
-
-# Add AzureEventHandler to the logger
-logger.addHandler(azure_event_handler)
-
 logger.setLevel(logging.INFO)
-logging.getLogger('opencensus').setLevel(logging.DEBUG)
+
 
 
 bp = Blueprint("routes", __name__, static_folder="static", template_folder="static")
