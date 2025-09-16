@@ -37,31 +37,38 @@ from backend.utils import (
 )
 
 from dotenv import load_dotenv
+import os
+import logging
+from azure.monitor.opentelemetry import configure_azure_monitor
+from azure.identity import ManagedIdentityCredential
 
 load_dotenv()
 
-from opencensus.ext.azure.log_exporter import AzureEventHandler
-from threading import Lock
+def configure_app_insights():
+    connection_string = os.environ.get("APPLICATIONINSIGHTS_CONNECTION_STRING")
 
-# Basic configuration for logging
+    if not connection_string:
+        raise ValueError("APPLICATIONINSIGHTS_CONNECTION_STRING is required")
+
+    use_managed_identity = os.environ.get("USE_MANAGED_IDENTITY", "false").lower() == "true"
+
+    if use_managed_identity:
+        client_id = os.environ.get("MANAGED_IDENTITY_CLIENT_ID")
+        credential = ManagedIdentityCredential(client_id=client_id) if client_id else ManagedIdentityCredential()
+        configure_azure_monitor(
+            connection_string=connection_string,
+            credential=credential,
+        )
+    else:
+        configure_azure_monitor(connection_string=connection_string)
+
+configure_app_insights()
+
 logging.basicConfig(level=logging.INFO)
 
-# Create a logger
 logger = logging.getLogger(__name__)
-
-connection_string= os.environ.get("APPLICATIONINSIGHTS_CONNECTION_STRING")
-
-# Add AzureEventHandler to the logger
-azure_event_handler = AzureEventHandler(connection_string=connection_string)
-
-# Explicitly set the lock for the handler
-azure_event_handler.lock = Lock()
-
-# Add AzureEventHandler to the logger
-logger.addHandler(azure_event_handler)
-
 logger.setLevel(logging.INFO)
-logging.getLogger('opencensus').setLevel(logging.DEBUG)
+
 
 
 bp = Blueprint("routes", __name__, static_folder="static", template_folder="static")
