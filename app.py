@@ -43,12 +43,35 @@ from azure.monitor.opentelemetry import configure_azure_monitor
 
 load_dotenv()
 
-# Configure Azure Monitor (do this early)
-configure_azure_monitor(
-    connection_string=os.environ.get("APPLICATIONINSIGHTS_CONNECTION_STRING"),
-)
+from dotenv import load_dotenv
+import os
+import logging
+from azure.monitor.opentelemetry import configure_azure_monitor
+from azure.identity import ManagedIdentityCredential
+from azure.monitor.opentelemetry import configure_azure_monitor
 
-# Configure logging
+load_dotenv()
+
+def configure_app_insights():
+    connection_string = os.environ.get("APPLICATIONINSIGHTS_CONNECTION_STRING")
+
+    if not connection_string:
+        raise ValueError("APPLICATIONINSIGHTS_CONNECTION_STRING is required")
+
+    use_managed_identity = os.environ.get("USE_MANAGED_IDENTITY", "false").lower() == "true"
+
+    if use_managed_identity:
+        client_id = os.environ.get("MANAGED_IDENTITY_CLIENT_ID")
+        credential = ManagedIdentityCredential(client_id=client_id) if client_id else ManagedIdentityCredential()
+        configure_azure_monitor(
+            connection_string=connection_string,
+            credential=credential,
+        )
+    else:
+        configure_azure_monitor(connection_string=connection_string)
+
+configure_app_insights()
+
 logging.basicConfig(level=logging.INFO)
 
 logger = logging.getLogger(__name__)
