@@ -28,9 +28,14 @@ const TermsAndConditionsModal: React.FC<TermsAndConditionsModalProps> = ({ hidde
 
   const points = [
     { text: 'I provide general People (previously known as HR) information and guidance.', iconName: 'CheckMark' },
-    { text: 'I don’t replace People professionals or give legal advice', iconName: 'Cancel' },
+    { text: 'I don’t replace People professionals or give legal advice.', iconName: 'Cancel' },
+    { text: 'I am unable to provide any individualised responses as I don’t have access to any underlying systems containing your personal data, such as Oracle Fusion.', iconName: 'Cancel' },
     {
-      text: 'Your chats are confidential, but will be stored and analysed so please avoid sharing sensitive personal data.',
+      text: 'Your chats are confidential and anonymised, but will be stored and analysed, so please avoid sharing any data of a sensitive and personal nature.',
+      iconName: 'Lock'
+    },
+    {
+      text: 'Feedback you provide about my responses will be used to improve my future responses.',
       iconName: 'Lock'
     },
     {
@@ -40,7 +45,7 @@ const TermsAndConditionsModal: React.FC<TermsAndConditionsModalProps> = ({ hidde
     {
       text: (
         <>
-          We would love to hear your feedback! Please email
+          We would love to hear your feedback! Please either provide feedback on my responses, or email more general feedback to
           <a href="mailto:engineering-ai@mhra.gov.uk">engineering-ai@mhra.gov.uk</a>with your comments.
         </>
       ),

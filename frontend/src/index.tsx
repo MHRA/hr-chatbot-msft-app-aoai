@@ -20,7 +20,7 @@ const App: React.FC = () => {
   })
 
   const handleAgree = () => {
-    setShowTerms(false)
+    setShowTerms(true)
     localStorage.setItem('agreedToTerms', 'true')
   }
 
