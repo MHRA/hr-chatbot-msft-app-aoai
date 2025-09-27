@@ -16,7 +16,7 @@ initializeIcons('https://res.cdn.office.net/files/fabric-cdn-prod_20241209.001/a
 const App: React.FC = () => {
   const [showTerms, setShowTerms] = useState(() => {
     const agreedToTerms = localStorage.getItem('agreedToTerms')
-    return agreedToTerms !== 'true'
+    return agreedToTerms == 'true'
   })
 
   const handleAgree = () => {

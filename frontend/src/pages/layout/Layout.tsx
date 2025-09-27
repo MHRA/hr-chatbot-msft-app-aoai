@@ -101,7 +101,12 @@ const Layout = () => {
         <span id="disclaimer-text" className={styles.disclaimerText}>
           DISCLAIMER: Remember that all answers are AI-generated, so do double check the answers' references to Insite,
           the People Team's documents on SharePoint, or with members of the People Team. Do not include personally
-          identifiable information (PII) in your queries. Any technical issues please reach out to us at engineering-ai@mhra.gov.uk
+          identifiable information (PII) in your queries.
+        </span>
+      </div>
+      <div className={styles.disclaimerBar}>
+        <span id="disclaimer-text" className={styles.disclaimerText}>
+          Any technical issues please reach out to us at <a href="mailto:engineering-ai@mhra.gov.uk">engineering-ai@mhra.gov.uk</a>
         </span>
       </div>
       <Outlet />
