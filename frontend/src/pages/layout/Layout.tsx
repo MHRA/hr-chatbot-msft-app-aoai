@@ -99,14 +99,13 @@ const Layout = () => {
       </header>
       <div className={styles.disclaimerBar}>
         <span id="disclaimer-text" className={styles.disclaimerText}>
-          DISCLAIMER: Remember that all answers are AI-generated, so do double check the answers' references to Insite,
-          the People Team's documents on SharePoint, or with members of the People Team. Do not include personally
-          identifiable information (PII) in your queries.
+          DISCLAIMER: All answers are AI-generated, so do check the answers against references in the People Team's documents on SharePoint or on Insite. 
+          Please do not include personally identifiable information (PII) in your queries.
         </span>
       </div>
       <div className={styles.disclaimerBar}>
         <span id="disclaimer-text" className={styles.disclaimerText}>
-          Any technical issues please reach out to us at <a href="mailto:engineering-ai@mhra.gov.uk">engineering-ai@mhra.gov.uk</a>
+          Any technical issues please reach out to the team at <a href="mailto:engineering-ai@mhra.gov.uk">engineering-ai@mhra.gov.uk</a>
         </span>
       </div>
       <Outlet />

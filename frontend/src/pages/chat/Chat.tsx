@@ -902,7 +902,7 @@ const Chat = () => {
                   </span>
                 </Stack>
               )}
-              <Stack>
+              {/* <Stack>
                 <CommandBarButton
                   id="clear-chat-button"
                   role="button"
@@ -968,7 +968,7 @@ const Chat = () => {
                   onDismiss={handleErrorDialogClose}
                   dialogContentProps={errorDialogContentProps}
                   modalProps={modalProps}></Dialog>
-              </Stack>
+              </Stack> */}
               <QuestionInput
                 clearOnSend
                 placeholder="Type a new question..."
